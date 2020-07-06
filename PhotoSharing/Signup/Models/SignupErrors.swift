@@ -8,6 +8,17 @@
 
 import Foundation
 
-enum SignupErrors: Error {
-
+enum SignupErrors: LocalizedError, Equatable {
+    case responseModelParsingError
+    case invalidURLStringError
+    case failedRequest(description:String)
+    
+    var errorDescription:String? {
+        switch self {
+        case .failedRequest(let description):
+            return description
+        case .responseModelParsingError, .invalidURLStringError :
+            return ""
+        }
+    }
 }
